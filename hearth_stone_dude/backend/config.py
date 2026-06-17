@@ -13,6 +13,12 @@ class Config:
     DATA_DIR = BASE_DIR / "data"
     DECKS_DIR = DATA_DIR / "decks"
     
+    # Kimi AI 配置
+    KIMI_API_KEY = "sk-kimi-3dMYfcl0DkDrLP0OzEknEIXQaxAReOxtR0SI5cUD2ZdWgqNFDAmGupTmL79f9c08"
+    
+    # AI 功能开关
+    ENABLE_AI = True
+    
     @classmethod
     def ensure_dirs(cls):
         cls.DATA_DIR.mkdir(parents=True, exist_ok=True)

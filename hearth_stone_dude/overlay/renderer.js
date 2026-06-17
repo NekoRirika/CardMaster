@@ -7,6 +7,19 @@ const opponentDeckEl = document.getElementById('opponent-deck');
 const opponentPlayedEl = document.getElementById('opponent-played');
 const friendlyHandEl = document.getElementById('friendly-hand');
 
+// AI 元素
+const aiSection = document.getElementById('ai-section');
+const deckIdentification = document.getElementById('deck-identification');
+const deckNameEl = document.getElementById('deck-name');
+const deckConfidenceEl = document.getElementById('deck-confidence');
+const deckDescEl = document.getElementById('deck-desc');
+const remainingCards = document.getElementById('remaining-cards');
+const remainingCardList = document.getElementById('remaining-card-list');
+const aiAnalysis = document.getElementById('ai-analysis');
+const aiAnalysisText = document.getElementById('ai-analysis-text');
+const playSuggestion = document.getElementById('play-suggestion');
+const suggestionText = document.getElementById('suggestion-text');
+
 let ws;
 let reconnectAttempts = 0;
 const maxReconnectAttempts = 5;
@@ -48,6 +61,7 @@ function updateUI(data) {
     gameStatusEl.style.display = 'block';
     opponentSection.style.display = 'none';
     friendlySection.style.display = 'none';
+    aiSection.style.display = 'none';
     return;
   }
   
@@ -60,6 +74,57 @@ function updateUI(data) {
   
   updateCardList(opponentPlayedEl, data.opponent_played_cards || []);
   updateCardList(friendlyHandEl, data.friendly_hand || []);
+  
+  // 更新 AI 分析
+  updateAISection(data);
+}
+
+function updateAISection(data) {
+  const aiData = data.ai_analysis;
+  
+  if (!aiData) {
+    aiSection.style.display = 'none';
+    return;
+  }
+  
+  aiSection.style.display = 'block';
+  
+  // 卡组识别
+  const deckAnalysis = aiData.deck_analysis;
+  if (deckAnalysis && deckAnalysis.identified_deck) {
+    deckIdentification.style.display = 'block';
+    deckNameEl.textContent = deckAnalysis.identified_deck;
+    deckConfidenceEl.textContent = `(${(deckAnalysis.confidence * 100).toFixed(0)}%)`;
+    
+    const deckInfo = deckAnalysis.deck_info || {};
+    deckDescEl.textContent = deckInfo.description || '';
+  } else {
+    deckIdentification.style.display = 'none';
+  }
+  
+  // 剩余关键卡牌
+  if (deckAnalysis && deckAnalysis.remaining_key_cards && deckAnalysis.remaining_key_cards.length > 0) {
+    remainingCards.style.display = 'block';
+    updateCardList(remainingCardList, deckAnalysis.remaining_key_cards);
+  } else {
+    remainingCards.style.display = 'none';
+  }
+  
+  // AI 局势分析
+  if (aiData.ai_deck_analysis) {
+    aiAnalysis.style.display = 'block';
+    aiAnalysisText.textContent = aiData.ai_deck_analysis;
+  } else {
+    aiAnalysis.style.display = 'none';
+  }
+  
+  // 出牌建议
+  if (aiData.play_suggestion) {
+    playSuggestion.style.display = 'block';
+    suggestionText.textContent = aiData.play_suggestion;
+  } else {
+    playSuggestion.style.display = 'none';
+  }
 }
 
 function updateCardList(container, cards) {

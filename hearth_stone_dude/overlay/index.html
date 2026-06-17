@@ -16,6 +16,33 @@
     <div class="content">
       <div id="game-status" class="game-status">等待游戏开始...</div>
       
+      <div id="ai-section" class="ai-section" style="display: none;">
+        <h2>🤖 AI 建议</h2>
+        
+        <div id="deck-identification" class="deck-identification" style="display: none;">
+          <div class="deck-name">
+            <span id="deck-name">识别中...</span>
+            <span id="deck-confidence" class="confidence">(0%)</span>
+          </div>
+          <div id="deck-desc" class="deck-desc"></div>
+        </div>
+        
+        <div class="remaining-cards" id="remaining-cards" style="display: none;">
+          <h3>关键卡牌:</h3>
+          <div id="remaining-card-list" class="card-list"></div>
+        </div>
+        
+        <div class="ai-analysis" id="ai-analysis" style="display: none;">
+          <h3>📊 局势分析</h3>
+          <div id="ai-analysis-text" class="ai-text"></div>
+        </div>
+        
+        <div class="play-suggestion" id="play-suggestion" style="display: none;">
+          <h3>💡 出牌建议</h3>
+          <div id="suggestion-text" class="ai-text"></div>
+        </div>
+      </div>
+      
       <div id="opponent-section" class="player-section" style="display: none;">
         <h2>对手</h2>
         <div class="stats">
