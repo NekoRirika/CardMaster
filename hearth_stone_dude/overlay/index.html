@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HearthStone Dude</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="overlay-container">
+    <div class="header">
+      <h1>炉石传说记牌器</h1>
+      <div id="status" class="status">连接中...</div>
+    </div>
+    
+    <div class="content">
+      <div id="game-status" class="game-status">等待游戏开始...</div>
+      
+      <div id="opponent-section" class="player-section" style="display: none;">
+        <h2>对手</h2>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-label">手牌:</span>
+            <span id="opponent-hand" class="stat-value">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">牌库:</span>
+            <span id="opponent-deck" class="stat-value">0</span>
+          </div>
+        </div>
+        <div class="played-cards">
+          <h3>已出卡牌:</h3>
+          <div id="opponent-played" class="card-list"></div>
+        </div>
+      </div>
+      
+      <div id="friendly-section" class="player-section" style="display: none;">
+        <h2>我方</h2>
+        <div class="hand-cards">
+          <h3>手牌:</h3>
+          <div id="friendly-hand" class="card-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="renderer.js"></script>
+</body>
+</html>
