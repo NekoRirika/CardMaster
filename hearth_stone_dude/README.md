@@ -38,16 +38,62 @@ hearth_stone_dude/
 
 ## 安装步骤
 
-### 1. 后端安装
+### 1. 快速启动（Windows 用户推荐）
 
-确保已安装 Python 3.8+，然后：
+项目提供了便捷的批处理脚本，一键完成环境配置：
 
 ```bash
+cd e:\Project\CardMaster\hearth_stone_dude
+setup.bat
+```
+
+安装完成后，可以直接使用：
+- `start_backend.bat` - 启动后端服务
+- `start_overlay.bat` - 启动前端覆盖层
+
+### 2. Python 虚拟环境设置（推荐）
+
+**强烈建议使用虚拟环境**以避免污染全局 Python 环境：
+
+#### Windows (PowerShell):
+```bash
+cd e:\Project\CardMaster\hearth_stone_dude
+
+# 创建虚拟环境（将在项目目录下创建 venv 文件夹）
+python -m venv venv
+
+# 激活虚拟环境
+.\venv\Scripts\Activate.ps1
+
+# 注意：如果执行策略限制，需要先运行：
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+#### Windows (CMD):
+```bash
+cd e:\Project\CardMaster\hearth_stone_dude
+python -m venv venv
+venv\Scripts\activate.bat
+```
+
+#### Linux/Mac:
+```bash
 cd hearth_stone_dude
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. 后端依赖安装
+
+确保已激活虚拟环境，然后：
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. 前端安装
+**注意**：虚拟环境的所有依赖都安装在项目目录下的 `venv` 文件夹中，不会影响系统 Python 环境。
+
+### 4. 前端安装
 
 确保已安装 Node.js 和 npm，然后：
 
@@ -69,8 +115,18 @@ ENABLE_AI = True
 
 ### 2. 启动后端服务
 
+**使用脚本（推荐）**：
 ```bash
-cd hearth_stone_dude
+start_backend.bat
+```
+
+**或手动启动**：
+```bash
+cd e:\Project\CardMaster\hearth_stone_dude
+.\venv\Scripts\Activate.ps1  # PowerShell
+# 或
+venv\Scripts\activate.bat    # CMD
+
 python -m backend.api_server
 ```
 
@@ -78,10 +134,14 @@ python -m backend.api_server
 
 ### 3. 启动前端覆盖层
 
-打开新的终端窗口：
-
+**使用脚本（推荐）**：
 ```bash
-cd hearth_stone_dude/overlay
+start_overlay.bat
+```
+
+**或手动启动**：
+```bash
+cd e:\Project\CardMaster\hearth_stone_dude\overlay
 npm start
 ```
 
@@ -91,6 +151,14 @@ npm start
 - 监控 Power.log 文件
 - 解析游戏数据
 - 通过覆盖层显示实时信息
+
+### 虚拟环境说明
+
+- **虚拟环境位置**：`e:\Project\CardMaster\hearth_stone_dude\venv`
+- **占用空间**：约 200-500MB，具体取决于依赖包数量
+- **删除环境**：直接删除 `venv` 文件夹即可完全清理
+- **重新创建**：随时可以重新创建虚拟环境，不会影响代码
+- **磁盘占用**：如果项目在 E 盘，虚拟环境也会在 E 盘，不会占用 C 盘空间
 
 ## 功能特性
 
